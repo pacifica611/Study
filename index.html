@@ -58,6 +58,9 @@
                   <input name="subject" placeholder="과목" required />
                   <input name="tags" placeholder="태그(쉼표 구분)" />
                   <textarea name="note" placeholder="오답 포인트 / 메모"></textarea>
+                  <label class="small">문제 사진 업로드(카메라 가능)</label>
+                  <input name="photo" type="file" accept="image/*" capture="environment" />
+                  <img id="photoPreview" class="photo-preview hidden" alt="문제 사진 미리보기" />
                   <button class="btn primary" type="submit">저장</button>
                 </form>
               </div>
@@ -69,7 +72,17 @@
           </section>
 
           <section id="planner" class="view">
-            <div class="grid">
+            <div class="grid planner-grid">
+              <div class="card glass">
+                <h2>달력 플래너</h2>
+                <div class="planner-toolbar">
+                  <button id="prevMonthBtn" class="btn ghost" type="button">◀</button>
+                  <strong id="calendarTitle"></strong>
+                  <button id="nextMonthBtn" class="btn ghost" type="button">▶</button>
+                </div>
+                <div id="calendarGrid" class="calendar-grid"></div>
+              </div>
+
               <div class="card glass">
                 <h2>할 일(Task) 추가</h2>
                 <form id="taskForm" class="form">
@@ -77,6 +90,14 @@
                   <input name="subject" placeholder="과목" required />
                   <input name="minutes" type="number" min="25" step="25" placeholder="예상 시간(분)" required />
                   <input name="due" type="date" />
+                  <label class="small">계획 주기</label>
+                  <select name="planCycle">
+                    <option value="daily">매일</option>
+                    <option value="weekly">매주</option>
+                    <option value="monthly">매월</option>
+                  </select>
+                  <label class="small">기준 날짜</label>
+                  <input name="planDate" type="date" />
                   <select name="priority">
                     <option value="1">우선순위 낮음</option>
                     <option value="2" selected>우선순위 중간</option>
@@ -85,10 +106,15 @@
                   <button class="btn primary" type="submit">Task 저장</button>
                 </form>
               </div>
-              <div class="card glass">
-                <h2>Task 백로그</h2>
-                <div id="taskList"></div>
+            </div>
+            <div class="card glass">
+              <h2>Task 백로그</h2>
+              <div class="planner-cycle-tabs">
+                <button class="cycle-tab active" data-cycle="daily">매일</button>
+                <button class="cycle-tab" data-cycle="weekly">매주</button>
+                <button class="cycle-tab" data-cycle="monthly">매월</button>
               </div>
+              <div id="taskList"></div>
             </div>
           </section>
 
