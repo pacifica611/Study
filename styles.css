@@ -1,0 +1,41 @@
+.panel {
+  display: none;
+}
+
+.panel.active {
+  display: block;
+}
+
+.tab.active {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color: #fff;
+}
+
+.meta,
+.submeta {
+  color: var(--bs-secondary-color);
+  font-size: 0.9rem;
+}
+
+.submeta {
+  font-size: 0.82rem;
+}
+
+.actions .btn {
+  --bs-btn-padding-y: 0.18rem;
+  --bs-btn-padding-x: 0.5rem;
+  --bs-btn-font-size: 0.78rem;
+}
+
+.empty {
+  border: 1px dashed var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  padding: 0.75rem;
+  color: var(--bs-secondary-color);
+  text-align: center;
+}
+
+.summary-card {
+  height: 100%;
+}
