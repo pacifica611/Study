@@ -1,0 +1,82 @@
+:root {
+  --bg1: #f4f7ff;
+  --bg2: #e9edff;
+  --text: #13203d;
+  --muted: #596683;
+  --primary: #3f6df7;
+  --ok: #13a66a;
+  --warn: #ef9b11;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top left, #fff, var(--bg1) 45%, var(--bg2));
+}
+.glass {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(36, 54, 114, 0.12);
+}
+
+.app-layout { min-height: 100vh; display: grid; grid-template-columns: 260px 1fr; gap: 14px; padding: 14px; }
+.sidebar { padding: 16px; display: flex; flex-direction: column; gap: 18px; position: sticky; top: 14px; height: calc(100vh - 28px); }
+.brand h1 { margin: 0; font-size: 24px; }
+.brand p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.sidebar-tabs { display: grid; gap: 8px; }
+.tab { border: none; border-radius: 12px; cursor: pointer; text-align: left; padding: 11px 12px; background: #eef2ff; color: var(--text); font-weight: 700; }
+.tab.active { background: var(--primary); color: #fff; }
+.sidebar-summary h3 { margin: 0 0 10px; }
+.sidebar-summary ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; display: grid; gap: 6px; }
+
+.main-panel { padding: 2px 4px 10px 0; }
+.topbar, .card { padding: 16px; margin-bottom: 14px; }
+.topbar { display: flex; justify-content: space-between; align-items: center; }
+.topbar h2 { margin: 0; }
+.subtitle { margin: 4px 0 0; color: var(--muted); }
+.view { display: none; }
+.view.active { display: block; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form { display: flex; flex-direction: column; gap: 8px; }
+input, textarea, select { border: 1px solid #d5ddf8; border-radius: 12px; padding: 10px 12px; font: inherit; }
+textarea { min-height: 90px; }
+.btn { border: none; border-radius: 12px; padding: 10px 14px; cursor: pointer; font-weight: 700; }
+.btn.primary { background: var(--primary); color: #fff; }
+.btn.success { background: var(--ok); color: #fff; }
+.btn.warn { background: var(--warn); color: #fff; }
+.btn.ghost { background: #eef2ff; color: var(--text); }
+.timeline { display: grid; gap: 10px; }
+.timeline-item { border: 1px solid #d9e2ff; border-radius: 14px; padding: 12px; background: #fff; }
+.meta { color: var(--muted); font-size: 13px; }
+.status { margin: 6px 0; font-weight: 700; }
+.actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.problem-card { border: 1px solid #d9e2ff; border-radius: 12px; padding: 10px; margin-bottom: 8px; background: #fff; }
+.badge { padding: 3px 8px; border-radius: 999px; font-size: 12px; margin-right: 6px; background: #edf2ff; }
+.small { font-size: 12px; color: var(--muted); }
+
+.photo-preview { width: 100%; max-height: 180px; object-fit: contain; border-radius: 12px; border: 1px solid #d9e2ff; }
+.hidden { display: none; }
+.problem-photo { width: 100%; margin-top: 8px; border-radius: 12px; border: 1px solid #d9e2ff; }
+
+.planner-grid { grid-template-columns: 1.2fr 1fr; }
+.planner-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.calendar-cell { border: 1px solid #d9e2ff; border-radius: 10px; min-height: 72px; padding: 6px; background: #fff; font-size: 12px; }
+.calendar-cell.muted { opacity: 0.35; }
+.calendar-cell .day { font-weight: 700; margin-bottom: 4px; }
+.calendar-cell .count { color: var(--primary); font-weight: 600; }
+.planner-cycle-tabs { display: flex; gap: 8px; margin-bottom: 10px; }
+.cycle-tab { border: none; border-radius: 999px; padding: 8px 12px; background: #eef2ff; font-weight: 700; cursor: pointer; }
+.cycle-tab.active { background: var(--primary); color: white; }
+
+@media (max-width: 980px) {
+  .app-layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; }
+  .sidebar-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .tab { text-align: center; }
+  .main-panel { padding: 0; }
+  .grid, .planner-grid { grid-template-columns: 1fr; }
+}
