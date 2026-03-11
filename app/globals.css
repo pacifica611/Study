@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --surface-muted: #f2f4fa;
+  --surface-emphasis: #eef3ff;
+  --text: #161c2d;
+  --text-muted: #5c647a;
+  --border: #dce1ee;
+  --primary: #3f63dd;
+  --secondary: #1f9d8b;
+  --success: #197a52;
+  --warning: #a56316;
+  --error: #b33a3a;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Pretendard', 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+  line-height: 1.6;
+}
+* { box-sizing: border-box; }
