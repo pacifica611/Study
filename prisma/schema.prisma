@@ -1,0 +1,137 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model UserProfile {
+  id                    String   @id @default(cuid())
+  name                  String
+  gradeYear             String
+  targetGrade           String
+  weakSubjects          String
+  schoolArrivalTime     String
+  schoolDepartureTime   String
+  lunchTime             String
+  selfStudySlots        String
+  afterSchoolLocation   String
+  morningZeroPossible   Boolean  @default(false)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  subjects              Subject[]
+  timeBlocks            TimeBlock[]
+  tasks                 StudyTask[]
+  sessions              StudySession[]
+  retrievalReviews      RetrievalReview[]
+  ideaNotes             IdeaNote[]
+  mockExamReviews       MockExamReview[]
+  weeklyReports         WeeklyReportSnapshot[]
+}
+
+model Subject {
+  id        String   @id @default(cuid())
+  name      String
+  code      String
+  profileId String
+  profile   UserProfile @relation(fields: [profileId], references: [id])
+}
+
+model TimeBlock {
+  id          String   @id @default(cuid())
+  profileId   String
+  profile     UserProfile @relation(fields: [profileId], references: [id])
+  date        DateTime
+  startTime   String
+  endTime     String
+  environment String
+  note        String?
+  createdAt   DateTime @default(now())
+}
+
+model StudyTask {
+  id              String   @id @default(cuid())
+  profileId        String
+  profile          UserProfile @relation(fields: [profileId], references: [id])
+  title            String
+  subjectCode      String
+  deliverable      String
+  taskType         String
+  difficulty       Int
+  estimatedMinutes Int
+  completed        Boolean  @default(false)
+  environmentHint  String
+  createdAt        DateTime @default(now())
+}
+
+model SprintPreset {
+  id      String @id @default(cuid())
+  minutes Int
+  label   String
+}
+
+model StudySession {
+  id                String   @id @default(cuid())
+  profileId          String
+  profile            UserProfile @relation(fields: [profileId], references: [id])
+  taskId             String?
+  task               StudyTask? @relation(fields: [taskId], references: [id])
+  sprintMinutes      Int
+  completed          Boolean
+  blankPageReview    Boolean
+  explainAloud       Boolean
+  retrievalRating    Int
+  reflection         String?
+  createdAt          DateTime @default(now())
+}
+
+model RetrievalReview {
+  id             String   @id @default(cuid())
+  profileId      String
+  profile        UserProfile @relation(fields: [profileId], references: [id])
+  subjectCode    String
+  successRate    Int
+  explainable    Boolean
+  note           String?
+  createdAt      DateTime @default(now())
+}
+
+model IdeaNote {
+  id           String   @id @default(cuid())
+  profileId     String
+  profile       UserProfile @relation(fields: [profileId], references: [id])
+  subjectCode   String
+  insight       String
+  actionRule    String
+  tags          String
+  createdAt     DateTime @default(now())
+}
+
+model MockExamReview {
+  id               String   @id @default(cuid())
+  profileId        String
+  profile          UserProfile @relation(fields: [profileId], references: [id])
+  examName         String
+  section          String
+  timeAllocation   String
+  stuckPoint       String
+  stuckReason      String
+  nextActionRule   String
+  createdAt        DateTime @default(now())
+}
+
+model WeeklyReportSnapshot {
+  id                         String   @id @default(cuid())
+  profileId                  String
+  profile                    UserProfile @relation(fields: [profileId], references: [id])
+  weekStart                  DateTime
+  deliverableCompletionRate  Int
+  retrievalSuccessRate       Int
+  explainabilityRate         Int
+  sprintCompletionRate       Int
+  environmentMatchQuality    Int
+  summary                    String
+  createdAt                  DateTime @default(now())
+}
